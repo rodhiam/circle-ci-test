@@ -67,4 +67,6 @@ workflows:
       - test:
           requires:
             - pre_test
-      - deploy
+      - deploy:
+          requires:
+            - test
