@@ -69,3 +69,6 @@ workflows:
           filters:
             branches:
               only: /master*$/
+  failure_all:
+    jobs:
+      - failure
