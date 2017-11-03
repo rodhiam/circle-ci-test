@@ -61,33 +61,9 @@ jobs:
           name: failure
           command: bundle exec rake failure
 
-
 workflows:
   version: 2
   plan_to_master:
     jobs:
       - plan:
-        filters:
-          branches:
-            only: /production\/*/
-  apply_to_master:
-    jobs:
-      - apply:
-        filters:
-          branches:
-            only: master
-  plan_to_staging:
-    jobs:
-      - plan:
-        filters:
-          branches:
-            only: /staging\/*/
-  apply_to_staging:
-    jobs:
-      - apply:
-        filters:
-          branches:
-            only: staging
-  failure_job:
-    jobs:
-      - failure
+
