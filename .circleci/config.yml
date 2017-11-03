@@ -42,25 +42,6 @@ jobs:
           name: apply
           command: bundle exec rake apply
 
-  failure:
-    docker:
-      # specify the version you desire here
-       - image: circleci/ruby:2.4.1-node-browsers
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      - run:
-          name: install dependencies
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-      # run tests!
-      - run:
-          name: failure
-          command: bundle exec rake failure
-
 workflows:
   version: 2
   plan_to_master:
@@ -75,3 +56,15 @@ workflows:
           filters:
             branches:
               only: master
+  plan_to_staging:
+    jobs:
+      - plan:
+          filters:
+            branches:
+              only: /staging\/.+$/
+  apply_to_staging:
+    jobs:
+      - plan:
+          filters:
+            branches:
+              only: staging
