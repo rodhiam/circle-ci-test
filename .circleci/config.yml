@@ -66,6 +66,6 @@ workflows:
   plan_to_master:
     jobs:
       - plan:
-        filters:
-          branches:
-            only: /master*$/
+          filters:
+            branches:
+              only: /master*$/
