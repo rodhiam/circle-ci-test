@@ -52,7 +52,7 @@ workflows:
               only: /mst\/.+$/
   apply_to_master:
     jobs:
-      - plan:
+      - apply:
           filters:
             branches:
               only: master
@@ -64,7 +64,7 @@ workflows:
               only: /stg\/.+$/
   apply_to_staging:
     jobs:
-      - plan:
+      - apply:
           filters:
             branches:
               only: staging
