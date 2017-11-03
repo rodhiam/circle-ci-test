@@ -65,4 +65,10 @@ workflows:
   version: 2
   plan_to_master:
     jobs:
-      - plan
+      - plan:
+        filters:
+          branches:
+            only: /production\/*/
+  failure_job:
+    jobs:
+      - failure
