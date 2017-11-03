@@ -68,7 +68,4 @@ workflows:
       - plan:
         filters:
           branches:
-            only: /production\/*/
-  failure_job:
-    jobs:
-      - failure
+            only: /master*$/
