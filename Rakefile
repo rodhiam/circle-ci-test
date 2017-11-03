@@ -5,17 +5,12 @@ RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
 
-desc "sample for pre-test"
-task :pre_test do
-  puts "pre test!!"
+desc "sample for plan"
+task :plan do
+  puts "plan!!"
 end
 
-desc "sample for test"
-task :test do
-  puts "test!!"
-end
-
-desc "sample for deploy"
-task :deploy do
-  puts "deploy!!"
+desc "sample for apply"
+task :apply do
+  puts "apply!!"
 end

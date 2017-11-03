@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  pre_test:
+  plan:
     docker:
       # specify the version you desire here
        - image: circleci/ruby:2.4.1-node-browsers
@@ -20,10 +20,10 @@ jobs:
 
       # run tests!
       - run:
-          name: run pre_tests
-          command: bundle exec rake pre_test
+          name: plan
+          command: bundle exec rake plan
 
-  test:
+  apply:
     docker:
       # specify the version you desire here
        - image: circleci/ruby:2.4.1-node-browsers
@@ -39,34 +39,32 @@ jobs:
 
       # run tests!
       - run:
-          name: run tests
-          command: bundle exec rake test
-
-  deploy:
-    docker:
-      # specify the version you desire here
-       - image: circleci/ruby:2.4.1-node-browsers
-    working_directory: ~/repo
-    steps:
-      - checkout
-
-      - run:
-          name: install dependencies
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-      - run:
-          name: run deploy
-          command: bundle exec rake deploy
+          name: apply
+          command: bundle exec rake apply
 
 workflows:
   version: 2
-  test_and_deploy:
+  plan_to_master:
     jobs:
-      - pre_test
-      - test:
-          requires:
-            - pre_test
-      - deploy:
-          requires:
-            - test
+      - plan:
+        filters:
+          branches:
+            only: /production\/*/
+  apply_to_master:
+    jobs:
+      - apply:
+        filters:
+          branches:
+            only: master
+  plan_to_staging:
+    jobs:
+      - plan:
+        filters:
+          branches:
+            only: /staging\/*/
+  apply_to_staging:
+    jobs:
+      - apply:
+        filters:
+          branches:
+            only: staging
