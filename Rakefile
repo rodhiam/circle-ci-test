@@ -14,3 +14,8 @@ desc "sample for apply"
 task :apply do
   puts "apply!!"
 end
+
+desc "sample for failure"
+task :failure do
+  puts "failure!!"
+end
