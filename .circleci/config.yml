@@ -68,7 +68,7 @@ workflows:
       - plan:
           filters:
             branches:
-              only: /master*$/
+              only: /master\/.+$/
   apply_to_master:
     jobs:
       - plan:
