@@ -47,6 +47,7 @@ workflows:
   apply_to_master:
     jobs:
       - apply:
+          type: approval
           filters:
             branches:
               only: master
